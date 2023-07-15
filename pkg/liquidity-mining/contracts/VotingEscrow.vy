@@ -75,7 +75,7 @@ event Supply:
 
 
 WEEK: constant(uint256) = 7 * 86400  # all future times are rounded by week
-MAXTIME: constant(uint256) = 365 * 86400  # 1 year
+MAXTIME: immutable(uint256)
 MULTIPLIER: constant(uint256) = 10 ** 18
 
 TOKEN: immutable(address)
@@ -101,7 +101,7 @@ smart_wallet_checker: public(address)
 
 
 @external
-def __init__(token_addr: address, _name: String[64], _symbol: String[32], _authorizer_adaptor: address):
+def __init__(token_addr: address, _name: String[64], _symbol: String[32], _authorizer_adaptor: address, _maxtime: uint256):
     """
     @notice Contract constructor
     @param token_addr 80/20 BAL-WETH BPT token address
@@ -122,6 +122,7 @@ def __init__(token_addr: address, _name: String[64], _symbol: String[32], _autho
     NAME = _name
     SYMBOL = _symbol
     DECIMALS = _decimals
+    MAXTIME = _maxtime
 
 @external
 @view
